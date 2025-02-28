@@ -3,6 +3,11 @@
 <suite name="EcommerceDependencyTestsSuite">
     <parameter name="author" value="Akshay"/>
     <parameter name="browserName" value="firefox"/>
+    <test name="AmazonShoppingTest">
+        <classes>
+            <class name="org.akshay.AmazonShoppingTest"/>
+        </classes>
+    </test>
     <test name="EcommerceSearchTests">
         <classes>
             <class name="org.akshay.EcommerceDependencyTest" />
