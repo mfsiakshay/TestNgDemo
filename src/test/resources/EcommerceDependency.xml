@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="EcommerceDependencyTestsSuite">
+    <parameter name="author" value="Akshay"/>
+    <parameter name="browserName" value="firefox"/>
+    <test name="EcommerceSearchTests">
+        <classes>
+            <class name="org.akshay.EcommerceDependencyTest" />
+        </classes>
+    </test>
+</suite>
