@@ -17,7 +17,6 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -119,8 +118,8 @@ public class BaseTest {
     }
 
     @AfterSuite
-    public void generateExtentReports() throws IOException {
+    public void generateExtentReports() {
         extentReports.flush();
-        Desktop.getDesktop().browse(new File("Tests.html").toURI());
+        //Desktop.getDesktop().browse(new File("Tests.html").toURI());
     }
 }
