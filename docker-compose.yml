@@ -38,6 +38,8 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - selenium-hub
+    dns:
+      - 8.8.8.8
     volumes:
       - ./test-output:/project/test-output
     environment:
