@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -20,6 +21,8 @@ import org.testng.annotations.*;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -42,37 +45,48 @@ public class BaseTest {
     }
 
     @BeforeTest
-    public void setUp(ITestContext context){
+    public void setUp(ITestContext context) throws MalformedURLException {
         extentTest = extentReports.createTest(context.getName());
-        String browserName = context.getCurrentXmlTest().getParameter("browserName");
-        if(browserName==null){
-            browserName="chrome";
-        }
-        switch (browserName.toLowerCase()){
-            case "chrome":
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
-                extentTest.info("Chrome Browser Started");
-                break;
-            case "edge":
-                WebDriverManager.edgedriver().setup();
-                driver = new EdgeDriver();
-                extentTest.info("MS Edge Browser Started");
-                break;
-            case "firefox":
-                WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
-                extentTest.info("Firefox Browser Started");
-                break;
-            default:
-                extentTest.warning("Browser Name is invalid");
-                break;
+        //String browserName = context.getCurrentXmlTest().getParameter("browserName");
+        String browserName = System.getProperty("browser","chrome");
+        boolean isRemote = Boolean.parseBoolean(System.getProperty("remote","false"));
+//        if(browserName==null){
+//            browserName="chrome";
+//        }
+        if(isRemote){
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setBrowserName(browserName.toLowerCase());
+            driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"), capabilities);
+        }else {
+            switch (browserName.toLowerCase()) {
+                case "chrome":
+                    WebDriverManager.chromedriver().setup();
+                    driver = new ChromeDriver();
+                    extentTest.info("Chrome Browser Started");
+                    break;
+                case "edge":
+                    WebDriverManager.edgedriver().setup();
+                    driver = new EdgeDriver();
+                    extentTest.info("MS Edge Browser Started");
+                    break;
+                case "firefox":
+                    WebDriverManager.firefoxdriver().setup();
+                    driver = new FirefoxDriver();
+                    extentTest.info("Firefox Browser Started");
+                    break;
+                default:
+                    extentTest.warning("Browser Name is invalid");
+                    break;
+            }
         }
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Capabilities capabilities = ((RemoteWebDriver) driver).getCapabilities();
         String deviceInfo = capabilities.getBrowserName()+" "+capabilities.getBrowserVersion();
         String author = context.getCurrentXmlTest().getParameter("author");
+        if(author==null){
+            author="Akshay";
+        }
         extentTest.assignAuthor(author);
         extentTest.assignDevice(deviceInfo);
     }
