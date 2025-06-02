@@ -43,5 +43,4 @@ services:
     volumes:
       - ./test-output:/project/test-output
     environment:
-      - BROWSER=chrome
-#    command: mvn test -Dremote=true -Dbrowser=chrome -DsuiteXmlFile=src/test/resources/OrangeHRM.xml
+      - suiteXmlFile=${SUITE_FILENAME}

@@ -6,4 +6,4 @@ COPY . /testNg
 
 RUN mvn clean compile
 
-CMD ["mvn", "test", "-Dremote=true", "-Dbrowser=chrome"]
+CMD ["sh", "-c", "mvn test -Dremote=true -Dbrowser=chrome -DsuiteXmlFile=$suiteXmlFile"]
