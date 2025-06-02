@@ -44,4 +44,4 @@ services:
       - ./test-output:/project/test-output
     environment:
       - BROWSER=chrome
-    command: mvn test -Dremote=true -Dbrowser=chrome -DsuiteXmlFile=src/test/resources/OrangeHRM.xml
+#    command: mvn test -Dremote=true -Dbrowser=chrome -DsuiteXmlFile=src/test/resources/OrangeHRM.xml
