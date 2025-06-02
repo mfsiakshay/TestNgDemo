@@ -43,4 +43,4 @@ services:
     volumes:
       - ./test-output:/project/test-output
     environment:
-      - suiteXmlFile=${SUITE_FILENAME}
+      - suiteXmlFile=${suiteXmlFile}
