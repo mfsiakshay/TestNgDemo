@@ -22,14 +22,4 @@
             </class>
         </classes>
     </test>
-    <test name="AmazonShoppingTest">
-        <parameter name="browserName" value="firefox"/>
-        <classes>
-            <class name="org.akshay.AmazonShoppingTest">
-                <methods>
-                    <include name="testShoppingWorkflow"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
 </suite>

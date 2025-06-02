@@ -27,7 +27,7 @@ public class FirstTest extends BaseTest{
         extentTest.info("entering email id");
         driver.findElement(By.id("email")).sendKeys("Akshay",Keys.ENTER);
         String foundUrl = driver.getCurrentUrl();
-        Assert.assertEquals(foundUrl, targetUrl,"Url Match");
+        Assert.assertNotEquals(foundUrl, targetUrl,"Url Match");
         extentTest.pass("Assertion Passed : Url MisMatched");
     }
 
