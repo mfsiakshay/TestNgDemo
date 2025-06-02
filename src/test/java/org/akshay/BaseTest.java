@@ -49,7 +49,7 @@ public class BaseTest {
         extentTest = extentReports.createTest(context.getName());
         //String browserName = context.getCurrentXmlTest().getParameter("browserName");
         String browserName = System.getProperty("browser","chrome");
-        boolean isRemote = Boolean.parseBoolean(System.getProperty("remote","false"));
+        boolean isRemote = Boolean.parseBoolean(System.getProperty("remote","true"));
 //        if(browserName==null){
 //            browserName="chrome";
 //        }
